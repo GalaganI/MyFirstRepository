@@ -24,7 +24,7 @@ public class ProducerThread implements Runnable {
     
     @Override
     public void run() {
-        System.out.println("ciozah");
+        System.out.println("ciozah2");
         
     }
 
