@@ -4,23 +4,23 @@
  */
 package threadtest;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
 public class Producer implements Runnable {
     
-    private String name;//thread name
-    private Thread producer;
-    private Warehouse list=new Warehouse(50);
+     String name;//thread name
+     Thread thread;
+     Warehouse list;
     public static Random rand= new Random();
    
     Producer(String threadname)
    {
-    name=threadname;
-    producer=new Thread(this,name);
-    System.out.println("New thread : " + producer);
-    producer.start();
+        //list=new Warehouse(50);
+        name=threadname;
+        thread=new Thread(this,name);
+        System.out.println("New thread : " + thread.getName());
+        thread.start();
    }
   
 
@@ -28,14 +28,16 @@ public class Producer implements Runnable {
     public void run()
         {
         
-            
+               list = new Warehouse(50);
+               System.out.println(list.size());
                 for(int i=0; i<list.size(); i++)
                 {
                 list.setItems(rand.nextInt(45));
                 System.out.println(list.getItem(i));
-                
+               
                 }
-                //producer.yield();
+                
+                thread.yield();
             }
              
         

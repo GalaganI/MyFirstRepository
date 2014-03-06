@@ -4,9 +4,6 @@
  */
 package threadtest;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 public class Reader implements Runnable{
     
@@ -16,7 +13,7 @@ public class Reader implements Runnable{
     Reader(String threadname)
     {
         reader= new Thread(this,"Thread reader ");
-        System.err.println("Reader created ");
+        System.out.println("Reader created "+reader.getName());
         reader.start();
     }
 
@@ -24,14 +21,14 @@ public class Reader implements Runnable{
     public void run() {
         
         try {
-            for(int i=0 ; i<(src.size()-1);i++)
+            for(int i=0 ; i<src.size();i++)
             {
-               System.out.println("\n"+src.getItem(i));
-               Thread.sleep(10);
+               System.out.println("\n Thread "+reader.getName()+" "+src.getItem(i));
+               Thread.sleep(1000);
             }
             } catch (InterruptedException ex) 
             {
-            Logger.getLogger(Reader.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Thread was interrupted");
             }
     }
     

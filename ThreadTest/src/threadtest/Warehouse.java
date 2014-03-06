@@ -15,17 +15,17 @@ public class Warehouse
 {
      
     private List<Integer> warehouse ;
-    
+    private int size ;
    
      public Warehouse(int number)
     {
         warehouse=new ArrayList<Integer>(number);
-       
+        size=number;
     }
      
      public synchronized int getItem(int index)
      {
-        return this.warehouse.get(index);
+        return warehouse.get(index);
      }
      
      public final void setItems(int item)
@@ -36,6 +36,6 @@ public class Warehouse
      }
      public int size()
      {
-         return this.warehouse.size();
+         return this.size;
      }
 }
