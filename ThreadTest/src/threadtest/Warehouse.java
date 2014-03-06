@@ -16,7 +16,7 @@ public class Warehouse
      
     private List<Integer> warehouse = new ArrayList<Integer>(50);
     
-    
+   
      public Warehouse(int number)
     {
         setItems(number);
@@ -33,5 +33,9 @@ public class Warehouse
         {
         warehouse.add(item);
         }
+     }
+     public int size()
+     {
+         return this.warehouse.size();
      }
 }
