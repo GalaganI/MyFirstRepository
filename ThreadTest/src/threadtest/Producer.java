@@ -4,6 +4,7 @@
  */
 package threadtest;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -11,7 +12,7 @@ public class Producer implements Runnable {
     
     private String name;//thread name
     private Thread producer;
-    private Warehouse list;
+    private Warehouse list=new Warehouse(50);
     public static Random rand= new Random();
    
     Producer(String threadname)
@@ -24,19 +25,20 @@ public class Producer implements Runnable {
   
 
     @Override
-    public void run() {
+    public void run()
+        {
         
-            for(int i=0;i<100;i++)
-            {   
-                while(i<list.size())
+            
+                for(int i=0; i<list.size(); i++)
                 {
-                this.list.setItems(rand.nextInt(45));
-                continue;
+                list.setItems(rand.nextInt(45));
+                System.out.println(list.getItem(i));
+                
                 }
-                producer.yield();
+                //producer.yield();
             }
              
         
     }
 
-}
+

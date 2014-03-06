@@ -14,12 +14,13 @@ import java.util.List;
 public class Warehouse 
 {
      
-    private List<Integer> warehouse = new ArrayList<Integer>(50);
+    private List<Integer> warehouse ;
     
    
      public Warehouse(int number)
     {
-        setItems(number);
+        warehouse=new ArrayList<Integer>(number);
+       
     }
      
      public synchronized int getItem(int index)
@@ -29,10 +30,9 @@ public class Warehouse
      
      public final void setItems(int item)
      {
-        while(warehouse.size()<50)
-        {
+       
         warehouse.add(item);
-        }
+        
      }
      public int size()
      {
