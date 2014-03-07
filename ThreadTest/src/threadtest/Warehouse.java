@@ -23,7 +23,7 @@ public class Warehouse
         size=number;
     }
      
-     public synchronized int getItem(int index)
+     public  int getItem(int index)
      {
         return warehouse.get(index);
      }
@@ -37,5 +37,10 @@ public class Warehouse
      public int size()
      {
          return this.size;
+     }
+     public synchronized void print(){
+        for(int i=0 ; i< this.size ; i++){
+         System.out.println("Item : "+i+" ="+this.getItem(i));
+        }
      }
 }

@@ -8,17 +8,13 @@ package threadtest;
 
 
 public class TestThreads {
-    public static void main(String args[]) {
-    
+    public static void main(String args[]) throws InterruptedException {
+    //Warehouse list= new Warehouse(50);
      Producer producer =new Producer("Producer");
+    // producer.thread.join();
    // System.out.println(producer.thread.isAlive());
-    Reader reader1=new Reader("Redear 1");
-    Reader reader2=new Reader("Redear 2");
-        try {
-            //producer.thread.join();
-            Thread.sleep(10000);
-        } catch (InterruptedException ex) {
-            System.out.println("Main thread interupted");;
-        }
+    Reader reader1=new Reader("Redear 1",producer);
+   Reader reader2=new Reader("Redear 2", producer);
+        
     }
-}
+  }

@@ -11,34 +11,39 @@ public class Producer implements Runnable {
     
      String name;//thread name
      Thread thread;
-     Warehouse list;
+     Warehouse list=new Warehouse(50);
     public static Random rand= new Random();
    
     Producer(String threadname)
    {
-        //list=new Warehouse(50);
+        
         name=threadname;
         thread=new Thread(this,name);
         System.out.println("New thread : " + thread.getName());
         thread.start();
    }
-  
+   
+ 
 
     @Override
     public void run()
         {
         
-               list = new Warehouse(50);
-               System.out.println(list.size());
-                for(int i=0; i<list.size(); i++)
-                {
-                list.setItems(rand.nextInt(45));
-                System.out.println(list.getItem(i));
                
+               System.out.println(list.size());
+                for(int i=0; i<100; i++)
+                {
+                   if(i<list.size())
+                   {
+                    list.setItems(rand.nextInt(45));
+                    System.out.println("Producer item number : "+i+" ("+list.getItem(i)+" )");
+                    continue;
+                   }
+                   thread.yield();
                 }
                 
-                thread.yield();
-            }
+                
+         }
              
         
     }

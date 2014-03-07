@@ -4,32 +4,38 @@
  */
 package threadtest;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class Reader implements Runnable{
     
     Thread reader;
-    Warehouse src;
+    Producer src;
     
-    Reader(String threadname)
+    Reader(String threadname , Producer producer)
     {
-        reader= new Thread(this,"Thread reader ");
+        reader= new Thread(this);
         System.out.println("Reader created "+reader.getName());
+        src=producer;
         reader.start();
     }
-
+  
     @Override
     public void run() {
         
-        try {
-            for(int i=0 ; i<src.size();i++)
-            {
-               System.out.println("\n Thread "+reader.getName()+" "+src.getItem(i));
-               Thread.sleep(1000);
+        System.out.println("Thread "+reader.getName());
+        try{
+                src.list.print();
+        }catch(NullPointerException e)
+        {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Reader.class.getName()).log(Level.SEVERE, null, ex);
             }
-            } catch (InterruptedException ex) 
-            {
-            System.out.println("Thread was interrupted");
-            }
+             src.list.print();
+        }
     }
     
 }
