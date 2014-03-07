@@ -11,12 +11,12 @@ public class Producer implements Runnable {
     
      String name;//thread name
      Thread thread;
-     Warehouse list=new Warehouse(50);
+     Warehouse list;
     public static Random rand= new Random();
    
-    Producer(String threadname)
+    Producer(String threadname , Warehouse list)
    {
-        
+        this.list=list;
         name=threadname;
         thread=new Thread(this,name);
         System.out.println("New thread : " + thread.getName());
@@ -36,7 +36,7 @@ public class Producer implements Runnable {
                    if(i<list.size())
                    {
                     list.setItems(rand.nextInt(45));
-                    System.out.println("Producer item number : "+i+" ("+list.getItem(i)+" )");
+                    //System.out.println("Producer item number : "+i+" ("+list.getItem(i)+" )");
                     continue;
                    }
                    thread.yield();

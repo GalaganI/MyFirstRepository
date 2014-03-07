@@ -7,40 +7,53 @@ package threadtest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author SERGIU
- */
+
 public class Warehouse 
 {
      
     private List<Integer> warehouse ;
     private int size ;
-   
-     public Warehouse(int number)
+    boolean valueSet=false;
+     
+    public Warehouse(int number)
     {
         warehouse=new ArrayList<Integer>(number);
         size=number;
     }
      
-     public  int getItem(int index)
+     public  synchronized int getItem(int index)
      {
+         while(!valueSet)
+         {
+             try{
+             wait();
+             }catch(InterruptedException e){
+                 System.out.println("Interuptedexception cought");
+             }
+          }
+         System.out.println("Got :"+warehouse.get(index));
+         valueSet=false;
+         notify();
         return warehouse.get(index);
      }
      
-     public final void setItems(int item)
+     public synchronized void setItems(int item)
      {
-       
+       while(valueSet){
+           try{
+           wait();
+           }catch(InterruptedException ex){
+                System.out.println("Interuptedexception cought");
+           }
+       }
         warehouse.add(item);
-        
+        valueSet=true;
+        System.out.println("Item was added to the list");
+        notify();
      }
      public int size()
      {
          return this.size;
      }
-     public synchronized void print(){
-        for(int i=0 ; i< this.size ; i++){
-         System.out.println("Item : "+i+" ="+this.getItem(i));
-        }
-     }
+     
 }
