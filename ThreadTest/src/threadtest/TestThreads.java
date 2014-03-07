@@ -9,9 +9,10 @@ package threadtest;
 
 public class TestThreads {
     public static void main(String args[]) throws InterruptedException {
-    Warehouse list = new Warehouse(50);
-     new Producer("Producer",list);
-     new Consumer("Redear 1",list);
-     new Consumer("Redear 2", list);
+       
+         Warehouse list = new Warehouse(50);
+         new Producer("Producer",list);
+         new Consumer("Redear 1",list);
+         //new Consumer("Redear 2", list);
     }
   }

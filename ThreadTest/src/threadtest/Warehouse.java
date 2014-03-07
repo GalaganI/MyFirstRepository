@@ -31,7 +31,7 @@ public class Warehouse
                  System.out.println("Interuptedexception cought");
              }
           }
-         System.out.println("Got :"+warehouse.get(index));
+         
          valueSet=false;
          notify();
         return warehouse.get(index);

@@ -19,14 +19,10 @@ public class Consumer implements Runnable{
   
     @Override
     public void run() {
-        
-        System.out.println("Thread "+reader.getName());
-       
-            for(int  i=0; i<list.size(); i++)
-                System.out.println(list.getItem(i));
-            
-          
-    }
+        int i=0;
+        while(true)
+            System.out.println("Thread "+reader.getName()+"got "+i+" "+list.getItem(i++));
+            }
 }  
     
 
