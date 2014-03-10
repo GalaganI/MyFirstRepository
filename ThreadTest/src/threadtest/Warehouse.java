@@ -4,7 +4,6 @@
  */
 package threadtest;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class Warehouse
          
          valueSet=false;
          notify();
-        return warehouse.iterator().hasNext() ?  warehouse.iterator().next() : -1;
+        return   warehouse.iterator().next() ;
      }
      
      public synchronized void setItems(int item)

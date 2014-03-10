@@ -13,6 +13,6 @@ public class TestThreads {
          Warehouse list = new Warehouse(50);
          new Producer("Producer",list);
          new Consumer("Redear 1",list);
-         new Consumer("Redear 2", list);
+         //new Consumer("Redear 2", list);
     }
   }

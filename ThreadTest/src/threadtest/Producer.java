@@ -32,15 +32,10 @@ public class Producer implements Runnable {
     public void run()
         {
         
-               int i=0;
-               //System.out.println(list.size());
-                while(i<50){
-                  try {
+                     for(int i=0 ; i<100;i++){ 
+                      if(i>list.size())
+                          thread.yield();
                       list.setItems(rand.nextInt(45));
-                      i++;
-                  }catch(ArrayIndexOutOfBoundsException e){
-                      System.out.println("No more place for items adding");
-                  }
                 }
                   
           }
