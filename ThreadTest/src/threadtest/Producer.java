@@ -5,6 +5,8 @@
 package threadtest;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Producer implements Runnable {
@@ -32,12 +34,14 @@ public class Producer implements Runnable {
         
                int i=0;
                //System.out.println(list.size());
-                while(i++<100)
+                while(i<50){
                   try {
                       list.setItems(rand.nextInt(45));
+                      i++;
                   }catch(ArrayIndexOutOfBoundsException e){
-                      thread.;
+                      System.out.println("No more place for items adding");
                   }
+                }
                   
           }
              

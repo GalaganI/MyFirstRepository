@@ -4,6 +4,7 @@
  */
 package threadtest;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Warehouse
         size=number;
     }
      
-     public  synchronized int getItem(int index)
+     public  synchronized int getItem()
      {
          while(!valueSet)
          {
@@ -34,7 +35,7 @@ public class Warehouse
          
          valueSet=false;
          notify();
-        return warehouse.get(index);
+        return warehouse.iterator().hasNext() ?  warehouse.iterator().next() : -1;
      }
      
      public synchronized void setItems(int item)
@@ -48,7 +49,7 @@ public class Warehouse
        }
         warehouse.add(item);
         valueSet=true;
-        System.out.println("Item was added to the list");
+        System.out.println("Item was added to the list "+item);
         notify();
      }
      public int size()
