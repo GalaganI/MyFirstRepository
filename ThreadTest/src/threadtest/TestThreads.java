@@ -11,8 +11,11 @@ public class TestThreads {
     public static void main(String args[]) throws InterruptedException {
        
          Warehouse list = new Warehouse(50);
-         new Producer("Producer",list);
-         new Consumer("Redear 1",list);
-         //new Consumer("Redear 2", list);
+         Thread producer = new Thread(new Producer(list),"Producer");
+         Thread consumer1 = new Thread (new Consumer(list),"Consumer 1");
+         Thread consumer2 = new Thread (new Consumer(list),"Consumer 2");
+         producer.start();
+         consumer1.start();
+         consumer2.start();
     }
   }

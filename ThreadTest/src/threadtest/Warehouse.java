@@ -11,9 +11,10 @@ import java.util.List;
 public class Warehouse 
 {
      
-    private List<Integer> warehouse ;
+    private static List<Integer> warehouse ;
     private int size ;
-    boolean valueSet=false;
+    public static int count=0;
+    static boolean valueSet=false;
      
     public Warehouse(int number)
     {
@@ -33,8 +34,8 @@ public class Warehouse
           }
          
          valueSet=false;
-         notify();
-        return   warehouse.iterator().next() ;
+         notifyAll();
+        return   warehouse.get(count++) ;
      }
      
      public synchronized void setItems(int item)
@@ -46,10 +47,13 @@ public class Warehouse
                 System.out.println("Interuptedexception cought");
            }
        }
-        warehouse.add(item);
-        valueSet=true;
-        System.out.println("Item was added to the list "+item);
-        notify();
+       if(warehouse.size()<50)
+       {
+            warehouse.add(item);
+            valueSet=true;
+            System.out.println("Item was added to the list "+item);
+            notifyAll();
+       }else {Thread.yield();}
      }
      public int size()
      {
