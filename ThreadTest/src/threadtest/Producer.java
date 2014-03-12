@@ -10,6 +10,7 @@ import java.util.Random;
 public class Producer implements Runnable {
     
      Warehouse list;
+     private final int MAX_CAPACITY =100;
      public static Random rand= new Random();
    
     Producer( Warehouse list)
@@ -23,10 +24,10 @@ public class Producer implements Runnable {
     @Override
     public void run()
         {
-            for(int i=0 ; i<100;i++)
+            for(int i=0 ; i<MAX_CAPACITY;i++)
             {
-               if(Warehouse.getCount()<50)
-                list.addItems(rand.nextInt(45));
+               if(i<list.size())
+                   list.addItems(rand.nextInt(45));
                else{Thread.yield();}
              }
          }

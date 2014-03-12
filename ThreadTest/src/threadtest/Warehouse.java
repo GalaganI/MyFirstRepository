@@ -39,6 +39,10 @@ public class Warehouse
      {
        return count;
      }
+     public static List<Integer> getWarehouse()
+     {
+        return warehouse ;
+     }
      public int size()
      {
          return this.size;

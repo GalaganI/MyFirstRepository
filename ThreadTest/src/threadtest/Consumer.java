@@ -12,7 +12,7 @@ public class Consumer implements Runnable{
     
     
     Warehouse list;
-    public static int count=0 ;
+    
     
     Consumer( Warehouse list )
     {
@@ -23,16 +23,17 @@ public class Consumer implements Runnable{
     public void run()
     {
        
-        while(count<list.size())
+        while(Warehouse.getCount()<list.size())
         {
-            count++;
             try {
-                System.out.println("Thread  "+Thread.currentThread().getName()+" got :  "+list.getItem());
+                
+                System.out.println("Thread  "+Thread.currentThread().getName()+" got item :  "+Warehouse.getCount()+"  "+list.getItem());
                 Thread.sleep(10);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
             }
          }
+         
      }
 }  
     
