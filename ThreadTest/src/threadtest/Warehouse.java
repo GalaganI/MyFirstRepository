@@ -13,47 +13,31 @@ public class Warehouse
      
     private static List<Integer> warehouse ;
     private int size ;
-    public static int count=0;
-    static boolean valueSet=false;
+    private static int count=0;
+   
      
-    public Warehouse(int number)
+    public Warehouse(int nOfItems)
     {
-        warehouse=new ArrayList<Integer>(number);
-        size=number;
+        warehouse=new ArrayList<Integer>(nOfItems);
+        size=nOfItems;
     }
      
-     public  synchronized int getItem()
-     {
-         while(!valueSet)
-         {
-             try{
-             wait();
-             }catch(InterruptedException e){
-                 System.out.println("Interuptedexception cought");
-             }
-          }
-         
-         valueSet=false;
-         notifyAll();
+     public  synchronized int getItem() throws InterruptedException
+     {  
+        if(warehouse.isEmpty())
+            wait();
         return   warehouse.get(count++) ;
      }
      
-     public synchronized void setItems(int item)
+     public synchronized void addItems(int item)
      {
-       while(valueSet){
-           try{
-           wait();
-           }catch(InterruptedException ex){
-                System.out.println("Interuptedexception cought");
-           }
-       }
-       if(warehouse.size()<50)
-       {
-            warehouse.add(item);
-            valueSet=true;
-            System.out.println("Item was added to the list "+item);
-            notifyAll();
-       }else {Thread.yield();}
+         warehouse.add(item);
+         System.out.println("Item was added to the list "+item);
+         notifyAll();
+     }
+     public static int getCount()
+     {
+       return count;
      }
      public int size()
      {

@@ -10,7 +10,6 @@ import java.util.Random;
 public class Producer implements Runnable {
     
      Warehouse list;
-     boolean suspendFlag=false;
      public static Random rand= new Random();
    
     Producer( Warehouse list)
@@ -25,10 +24,12 @@ public class Producer implements Runnable {
     public void run()
         {
             for(int i=0 ; i<100;i++)
-               list.setItems(rand.nextInt(45));
+            {
+               if(Warehouse.getCount()<50)
+                list.addItems(rand.nextInt(45));
+               else{Thread.yield();}
+             }
          }
-             
-        
-    }
+}
 
 

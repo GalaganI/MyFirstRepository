@@ -4,6 +4,9 @@
  */
 package threadtest;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class Consumer implements Runnable{
     
@@ -17,18 +20,20 @@ public class Consumer implements Runnable{
     }
   
     @Override
-    public void run() {
+    public void run()
+    {
        
-        while(count<list.size()){
+        while(count<list.size())
+        {
             count++;
-            System.out.println("Thread  "+Thread.currentThread().getName()+" got :  "+list.getItem());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            
-        }
-        }
+            try {
+                System.out.println("Thread  "+Thread.currentThread().getName()+" got :  "+list.getItem());
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
             }
+         }
+     }
 }  
     
 
