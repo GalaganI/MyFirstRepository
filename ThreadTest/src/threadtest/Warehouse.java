@@ -13,7 +13,7 @@ public class Warehouse
      
     private static List<Integer> warehouse ;
     private int size ;
-    private static int count=0;
+    private static int nOfReadItems=0;
    
      
     public Warehouse(int nOfItems)
@@ -26,7 +26,7 @@ public class Warehouse
      {  
         if(warehouse.isEmpty())
             wait();
-        return   warehouse.get(count++) ;
+        return   warehouse.get(nOfReadItems++) ;
      }
      
      public synchronized void addItems(int item)
@@ -35,15 +35,14 @@ public class Warehouse
          System.out.println("Item was added to the list "+item);
          notifyAll();
      }
-     public static int getCount()
+     public static int getNofReadItems()
      {
-       return count;
+       return nOfReadItems;
      }
-     public static List<Integer> getWarehouse()
-     {
+     public static List<Integer> getWarehouse(){
         return warehouse ;
      }
-     public int size()
+     public int getSize()
      {
          return this.size;
      }

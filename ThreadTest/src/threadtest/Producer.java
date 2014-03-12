@@ -26,7 +26,7 @@ public class Producer implements Runnable {
         {
             for(int i=0 ; i<MAX_CAPACITY;i++)
             {
-               if(i<list.size())
+               if(i<list.getSize())
                    list.addItems(rand.nextInt(45));
                else{Thread.yield();}
              }

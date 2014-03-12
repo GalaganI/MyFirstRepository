@@ -11,10 +11,10 @@ import java.util.logging.Logger;
 public class Consumer implements Runnable{
     
     
-    Warehouse list;
+  Warehouse list;
     
     
-    Consumer( Warehouse list )
+  public  Consumer( Warehouse list )
     {
         this.list=list;
     }
@@ -23,11 +23,11 @@ public class Consumer implements Runnable{
     public void run()
     {
        
-        while(Warehouse.getCount()<list.size())
+        while(Warehouse.getNofReadItems()<list.getSize())
         {
             try {
                 
-                System.out.println("Thread  "+Thread.currentThread().getName()+" got item :  "+Warehouse.getCount()+"  "+list.getItem());
+                System.out.println("Thread  "+Thread.currentThread().getName()+" got item :  "+Warehouse.getNofReadItems()+"  "+list.getItem());
                 Thread.sleep(10);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
