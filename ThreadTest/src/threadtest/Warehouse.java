@@ -13,7 +13,7 @@ public class Warehouse
      
     private static List<Integer> warehouse ;
     private int size ;
-    private static int nOfReadItems=0;
+    private static int consumedItemsCount=0;
    
      
     public Warehouse(int nOfItems)
@@ -24,20 +24,23 @@ public class Warehouse
      
      public  synchronized int getItem() throws InterruptedException
      {  
-        if(warehouse.isEmpty())
+        if(warehouse.isEmpty()||warehouse.iterator().next()==null||consumedItemsCount>=warehouse.size())
             wait();
-        return   warehouse.get(nOfReadItems++) ;
+        return   warehouse.get(consumedItemsCount++) ;
      }
      
      public synchronized void addItems(int item)
      {
          warehouse.add(item);
          System.out.println("Item was added to the list "+item);
-         notifyAll();
+         notify();
      }
-     public static int getNofReadItems()
+     public static int getConsumedItemsCount()
      {
-       return nOfReadItems;
+       return consumedItemsCount;
+     }
+     public static void setConsumedItemsCount(int changes){
+        consumedItemsCount=changes;
      }
      public static List<Integer> getWarehouse(){
         return warehouse ;

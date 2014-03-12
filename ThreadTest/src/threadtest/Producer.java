@@ -5,17 +5,20 @@
 package threadtest;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Producer implements Runnable {
     
      Warehouse list;
-     private final int MAX_CAPACITY =100;
+     private int pCapacity ;
      public static Random rand= new Random();
    
-    Producer( Warehouse list)
+    Producer( Warehouse list, int capacity )
    {
         this.list=list;
+        this.pCapacity=capacity;
        
    }
    
@@ -24,10 +27,16 @@ public class Producer implements Runnable {
     @Override
     public void run()
         {
-            for(int i=0 ; i<MAX_CAPACITY;i++)
+            for(int i=0 ; i<pCapacity;i++)
             {
-               if(i<list.getSize())
+               if(i<list.getSize()){
                    list.addItems(rand.nextInt(45));
+                   try {
+                       Thread.sleep(rand.nextInt(30));
+                   } catch (InterruptedException ex) {
+                       Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+               }
                else{Thread.yield();}
              }
          }
