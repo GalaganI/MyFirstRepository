@@ -15,15 +15,13 @@ public class Producer implements Runnable {
      private int pCapacity ;
      public static Random rand= new Random();
    
-    Producer( Warehouse list, int capacity )
+  public   Producer( Warehouse list, int capacity )
    {
         this.list=list;
         this.pCapacity=capacity;
        
    }
    
- 
-
     @Override
     public void run()
         {

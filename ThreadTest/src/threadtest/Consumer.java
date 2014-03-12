@@ -28,7 +28,7 @@ public class Consumer implements Runnable{
         {
             try {
                 
-                System.out.println("Thread  "+Thread.currentThread().getName()+" got item :  "+Warehouse.getConsumedItemsCount()+"  "+list.getItem());
+                System.out.println("Thread  "+Thread.currentThread().getName()+" got item :  "+Warehouse.getConsumedItemsCount()+"  "+list.getItem()+" - "+Warehouse.getConsumedItemsCount());
                 Thread.sleep(r.nextInt(45));
             } catch (InterruptedException ex) {
                 Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);

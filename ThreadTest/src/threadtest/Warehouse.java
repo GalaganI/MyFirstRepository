@@ -39,9 +39,7 @@ public class Warehouse
      {
        return consumedItemsCount;
      }
-     public static void setConsumedItemsCount(int changes){
-        consumedItemsCount=changes;
-     }
+     
      public static List<Integer> getWarehouse(){
         return warehouse ;
      }
