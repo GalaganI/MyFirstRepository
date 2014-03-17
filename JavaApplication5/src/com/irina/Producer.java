@@ -5,9 +5,9 @@
 package com.irina;
 
 import java.util.Random;
-import java.util.concurrent.BlockingQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
+
 
 /**
  *
@@ -16,10 +16,12 @@ import java.util.logging.Logger;
 public class Producer implements Runnable{
     
     private String name;
+    
+    
     private final Queue sharedQueue;
     private int maxItemsToProduce;
-    private static Random r =new Random();
     private static int numberOfActiveProducers = 0;
+    private static final Object numberOfActiveProducersLock = new Object();
     
     public Producer(String name , Queue sharedQueue,int maxItemsToProduce )
     {
@@ -31,25 +33,37 @@ public class Producer implements Runnable{
     @Override
     public void run() 
     {
-        for(int i=0 ; i<maxItemsToProduce ; i++)
-        {
-            int var=r.nextInt(45);
-            try {
-                sharedQueue.addItem(var);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
+       synchronized (numberOfActiveProducersLock) {
+			numberOfActiveProducers++;
+		}
+        Random r =new Random();
+        try{
+                for(int i=0 ; i<maxItemsToProduce ; i++)
+                {
+                    if(sharedQueue.isFull()){
+                        break; //stop producing when queue is full
+                    }
+
+                             int producedItem=r.nextInt(45);
+                             System.out.println("producer['" + name + "'] >>> producing '" + producedItem + "' (producedCount: " + i + ")");
+
+                             sharedQueue.addItem(producedItem);
+
+                             Thread.sleep(r.nextInt(50));
+                }
+            } catch (InterruptedException ex) {}
+               
+        synchronized (numberOfActiveProducersLock) {
+			numberOfActiveProducers--;
+		}
             }
-            System.out.println("Producer [ " +name+" ]"+" created: "+var+" item ");
-        }
     
-    
-    }
-    public static synchronized int getNumberOfActiveProducers()
+    public static int getNumberOfActiveProducers()
     {
+        synchronized(numberOfActiveProducersLock)
+        {
         return numberOfActiveProducers;
+        }
     }
-    private static synchronized void incrementNumberOfActiveProducers()
-    {
-        numberOfActiveProducers++;
-    }
+    
 }

@@ -37,15 +37,16 @@ public class Consumer implements Runnable{
                             // nothing to consume. Queue is empty. Too slow producer or producer is dead
                             if (Producer.getNumberOfActiveProducers() <= 0) {
 						break; // no active producers. Let's finish this consumer
-                            }else {
+                            }
+                        }else {
 					// We consumed successfully a item
 					totalConsumedByThisConsumer++;
 					System.out.println("Consumer '" + name + "' consume <<< " + item);
-				   }
+			       }
 
 				Thread.sleep(rnd.nextInt(50));
-			    }
-                }
+	          }
+               
 
 		} catch (InterruptedException ex) {
 			System.out.println("Consumer '" + name + "' process killed");
