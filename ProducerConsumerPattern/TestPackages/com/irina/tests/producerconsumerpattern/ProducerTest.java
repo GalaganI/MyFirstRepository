@@ -2,23 +2,26 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.irina.producerconsumerpatternTests;
+package com.irina.tests.producerconsumerpattern;
 
 import com.irina.producerconsumerpattern.Producer;
+import com.irina.producerconsumerpattern.QueueOfItems;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
 
 /**
  *
  * @author SERGIU
  */
 public class ProducerTest {
+        private QueueOfItems qOfItemsDouble = Mockito.mock(QueueOfItems.class);
     
-    public ProducerTest() {
+      public ProducerTest() {
     }
     
     @BeforeClass

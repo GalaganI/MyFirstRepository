@@ -11,15 +11,19 @@ public class Consumer implements Runnable {
 
     private QueueOfItems scheduledQueue ;
     private String name;
+    private int totalConsumedItemsCounter = 0;
 
     public Consumer(String name , QueueOfItems scheduledQueue ){
         this.name=name;
         this.scheduledQueue=scheduledQueue;
     }
     
+    public boolean isAnyProducerAlive() {
+        return Producer.getNumberOfRunningProducers() > 0;
+    }
+    
     @Override
     public void run() {
-        int totalConsumedItemsCounter=0;
         
         try{
             Random rnd=new Random();
@@ -28,7 +32,7 @@ public class Consumer implements Runnable {
                 Integer item=scheduledQueue.retrieveItem();
                 if(item==null){
                     //There is nothing to consume , producer is too slow or even dead
-                    if(Producer.getNumberOfRunningProducers()<=0){
+                    if(!isAnyProducerAlive()){
                         break;// there is no alive producers
                     }
                 }else{
@@ -45,5 +49,8 @@ public class Consumer implements Runnable {
         //Print statistics
         System.out.println("Number of items consumed by process "+name+" is # "+totalConsumedItemsCounter);
     }
-    
+    public int getTotalConsumedItemsCounter(){
+        
+        return this.totalConsumedItemsCounter;
+    }
 }
