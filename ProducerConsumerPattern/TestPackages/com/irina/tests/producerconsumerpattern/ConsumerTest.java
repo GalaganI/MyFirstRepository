@@ -19,11 +19,13 @@ import static org.mockito.Mockito.*;
  */
 public class ConsumerTest {
     
-    private Consumer consumer;
-    private QueueOfItems queueOfItemsMock ;
+   
     
     
-    
+//    @After
+//    public void tearDown() {
+//        Thread.yield();
+//    }
 
     /**
      * Test of run method, of class Consumer, when retrieved from Queue item==null.
@@ -31,8 +33,8 @@ public class ConsumerTest {
     @Test
     public void testRun() {
         
-        queueOfItemsMock=mock(QueueOfItems.class);
-        consumer = new Consumer("TestConsumer", queueOfItemsMock) ;
+       QueueOfItems queueOfItemsMock=mock(QueueOfItems.class);
+        Consumer consumer = new Consumer("TestConsumer", queueOfItemsMock) ;
         ///
         when(queueOfItemsMock.retrieveItem()).thenReturn(null);
         consumer.run();
@@ -41,20 +43,20 @@ public class ConsumerTest {
           
 
 }
-//    /**
-//     * Test of run method, of class Consumer, when retrieved from Queue item!=null.
-//     */
-//    @Test
-//    public void testRun2() {
-//        
-//        queueOfItemsMock=mock(QueueOfItems.class);
-//        consumer = new Consumer("TestConsumer", queueOfItemsMock) ;
-//        ///
-//        when(queueOfItemsMock.retrieveItem()).thenReturn(35);
-//        consumer.run();
-//        assertEquals(consumer.getTotalConsumedItemsCounter(), 1);
-//            
-//          
-//
-//}
+    /**
+     * Test of run method, of class Consumer, when retrieved from Queue item!=null.
+     */
+    @Test
+    public void testRun2() {
+        
+        QueueOfItems queueOfItemsMock=mock(QueueOfItems.class);
+        Consumer consumer = new Consumer("TestConsumer", queueOfItemsMock) ;
+        ///
+        when(queueOfItemsMock.retrieveItem()).thenReturn(35);
+        consumer.run();
+        assertEquals(consumer.getTotalConsumedItemsCounter(), 1);
+        Thread.yield();
+          
+
+       }
 }
